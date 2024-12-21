@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -23,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.example.marvel.api.CharacterViewModel
 import com.example.marvel.data.AppUrls
 import com.example.marvel.ui.components.CardLayout
@@ -34,8 +33,8 @@ import com.example.marvel.ui.theme.Red1
 fun MainScreen(navController: NavHostController, characterViewModel: CharacterViewModel) {
     val characters = characterViewModel.characters.collectAsState().value
     val errorMessage = characterViewModel.errorMessage.collectAsState().value
-    val isLoading = characters.isEmpty() && errorMessage == null // Если персонажи не загружены и нет ошибки, значит идет загрузка
-    val hasError = errorMessage != null // Если есть сообщение об ошибке
+    val isLoading = characters.isEmpty() && errorMessage == null
+    val hasError = errorMessage != null
 
     LaunchedEffect(Unit) {
         characterViewModel.getCharacters(
@@ -85,7 +84,6 @@ fun MainScreen(navController: NavHostController, characterViewModel: CharacterVi
                 contentDescription = null,
                 placeholder = ColorPainter(Color.Gray)
             )
-
 
             Text(
                 text = "Choose your hero",
@@ -145,3 +143,5 @@ fun MainScreen(navController: NavHostController, characterViewModel: CharacterVi
         }
     }
 }
+
+
